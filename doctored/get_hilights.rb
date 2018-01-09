@@ -6,6 +6,7 @@ text =
 }'
 
 
+
 # #TODO: can i not look through the text i have already looked thru?
 data = text.scan(/(?<=\\n\\n\\u0010\\u0012\\u001c\\n\\u0010\\u0012\\u001c\*\\n\\u001c)(.*?)(?=\\n\\u001c)/).flatten
 highlights = data.each do |highlight|
@@ -13,5 +14,12 @@ highlights = data.each do |highlight|
   puts ""
   puts '----------------------------------'
 end
+#
+# File.open("doctored.txt", "w+") {|f| f.write highlights.join("\n") }
 
-File.open("doctored_the_disillusionment_of_an_american_physician.txt", "w+") {|f| f.write highlights.join("\n") }
+text = []
+File.read("doctored.txt").each_line do |line|
+  text << line.chop
+end
+
+File.open("doctored.rb", "w+") {|f| f.write text }
